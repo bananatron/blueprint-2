@@ -1,0 +1,70 @@
+databases:
+  - name: blueprint_pg
+    databaseName: blueprint_production
+    user: blueprint
+    region: oregon
+services:
+  - type: redis
+    name: blueprint-sidekiq-redis
+    region: oregon
+    maxmemoryPolicy: noeviction
+    ipAllowList: [] # only allow internal connections
+  - type: redis
+    name: blueprint-actioncable-redis
+    region: oregon
+    maxmemoryPolicy: noeviction
+    ipAllowList: [] # only allow internal connections
+  - type: web
+    name: blueprint
+    env: ruby
+    region: oregon
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: APPLICATION_HOST
+        sync: false
+      - key: ASSET_HOST
+        sync: false
+      - key: SMTP_ADDRESS
+        sync: false
+      - key: SMTP_DOMAIN
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: SMTP_USERNAME
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: blueprint_pg
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        generateValue: true
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: RACK_ENV
+        value: production
+      - key: SIDEKIQ_USERNAME
+        value: sidekiq
+      - key: SIDEKIQ_PASSWORD
+        sync: false
+      - key: ACTIONCABLE_REDIS_URL
+        fromService:
+          type: redis
+          name: blueprint-actioncable-redis
+          property: connectionString
+  - type: worker
+    name: blueprint-sidekiq-worker
+    env: ruby
+    region: oregon
+    buildCommand: bundle install
+    startCommand: bundle exec sidekiq -C ./config/sidekiq.yml
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: blueprint_pg
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: blueprint-sidekiq-redis
+          property: connectionString
