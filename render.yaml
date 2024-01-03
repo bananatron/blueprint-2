@@ -38,9 +38,11 @@ services:
           name: blueprint_pg
           property: connectionString
       - key: RAILS_MASTER_KEY
-        generateValue: true
+        generateValue: false
+        sync: false
       - key: SECRET_KEY_BASE
-        generateValue: true
+        generateValue: false
+        sync: false
       - key: RACK_ENV
         value: production
       - key: SIDEKIQ_USERNAME
