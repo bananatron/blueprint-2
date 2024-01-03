@@ -133,9 +133,6 @@ GEM
     irb (1.10.1)
       rdoc
       reline (>= 0.3.8)
-    jbuilder (2.11.5)
-      actionview (>= 5.0.0)
-      activesupport (>= 5.0.0)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -299,7 +296,6 @@ DEPENDENCIES
   devise
   dotenv-rails
   importmap-rails
-  jbuilder
   oj
   pg (~> 1.1)
   puma (>= 5.0)

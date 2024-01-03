@@ -45,6 +45,7 @@ services:
         sync: false
       - key: RACK_ENV
         value: production
+        sync: false
       - key: SIDEKIQ_USERNAME
         value: sidekiq
       - key: SIDEKIQ_PASSWORD
