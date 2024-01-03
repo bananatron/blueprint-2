@@ -49,6 +49,7 @@ gem 'autoprefixer-rails'       # Auto-prefixing for CSS
 gem 'devise'                   # Authentication
 gem 'sidekiq'                  # Background jobs processor
 gem 'oj'                       # Optimized JSON
+# gem 'postmark-rails'
 # gem 'rack-canonical-host'      # Redirects all traffic to a single host
 # gem 'activeadmin'
 

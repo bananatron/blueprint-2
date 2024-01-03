@@ -22,6 +22,8 @@ Rails.application.configure do
 
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
   # config.public_file_server.enabled = false
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present? || ENV['RENDER'].present?
+  config.serve_static_assets = true
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
@@ -43,6 +45,7 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   # config.action_cable.url = "wss://example.com/cable"
   # config.action_cable.allowed_request_origins = [ "http://example.com", /http:\/\/example.*/ ]
+  config.action_cable.allowed_request_origins = [ENV.fetch("APPLICATION_HOST")]
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
@@ -94,4 +97,12 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+
+  ## Postmark
+  # config.action_mailer.delivery_method = :postmark
+
+  # config.action_mailer.postmark_settings = {
+  #   api_token: ENV['POSTMARK_API_TOKEN']
+  # }
 end
