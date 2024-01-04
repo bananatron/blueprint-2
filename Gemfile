@@ -52,6 +52,7 @@ gem 'oj'                       # Optimized JSON
 # gem 'postmark-rails'
 # gem 'rack-canonical-host'      # Redirects all traffic to a single host
 # gem 'activeadmin'
+# gem 'aws-sdk-s3', require: false # For digital ocean spaces
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
