@@ -1,8 +1,13 @@
 # Blueprint 2
 
-A Rails 7 starter with SCSS, Devise, ActionCable, etc.
+A Rails 7 starter w/ the following defaults:
 
 - Deployable to Render
+- Devise installed
+- ActionCable ready
+- Alpine example for reactivity
+- SCSS w/ autoprefixing
+- Tachyons for styles
 
 
 ## Setup Postmark

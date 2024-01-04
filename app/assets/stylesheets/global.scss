@@ -293,3 +293,7 @@ th {
 .actions {
   margin-bottom: $base-spacing;
 }
+
+[x-cloak] {
+  display: none;
+}
