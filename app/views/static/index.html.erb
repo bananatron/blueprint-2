@@ -1,5 +1,27 @@
 
 
+<main>
+    <div id="cable-test"></div>
+</main>
+
 <footer>
     <p>&copy; 2023 Toadstool Labs LLC. All rights reserved.</p>
 </footer>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        window.Cable.subscriptions.create({ channel: "TestChannel", id: 1 }, {
+            connected: () => {
+                if (window.debug) console.log('✅ TableChannel connected');
+            },
+            received: (data) => {
+                if (window.debug)  console.log('TestChannel received data', data);
+                document.getElementById('cable-test').innerHTML = data;
+            },
+            disconnected: () => {
+                if (window.debug) console.warn('⚠️ TestChannel disconnected');
+            }
+        });
+    });
+</script>

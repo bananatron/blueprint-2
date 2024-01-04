@@ -60,6 +60,7 @@ group :development, :test do
   gem 'bullet'
   gem 'dotenv-rails'
   gem 'byebug'
+  gem 'prosopite' # N+1 catcher
 end
 
 group :development do

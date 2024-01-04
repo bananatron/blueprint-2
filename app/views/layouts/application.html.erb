@@ -9,6 +9,30 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <script type="text/javascript">
+      window.application_host = '<%= ENV['APPLICATION_HOST'] %>';
+      window.rails_env = '<%= Rails.env %>';
+      window.debug = window.location.hostname === 'localhost';
+
+      window.sendFetchRequest = function (url, options) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+        if (!csrfToken) throw new Error('CSRF token not found!');
+
+        options = options || {};
+        options.headers = options.headers || { 'Content-Type': 'application/json' };
+        options.headers['X-CSRF-Token'] = csrfToken;
+
+        return fetch(url, options)
+          .then(response => {
+            return response.json();
+          })
+          .catch(error => {
+            console.error('Fetch error:', error.message);
+            throw error;
+          });
+        };
+    </script>
   </head>
 
   <body>

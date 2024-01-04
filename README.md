@@ -1,6 +1,6 @@
 # Blueprint 2
 
-A rails 7 starter with SCSS, Devise, etc.
+A Rails 7 starter with SCSS, Devise, ActionCable, etc.
 
 - Deployable to Render
 
@@ -15,4 +15,3 @@ A rails 7 starter with SCSS, Devise, etc.
 - Uncomment gem
 - Uncomment `aws_digital_ocean.rb`
 - Set ENV vars in said file
-
