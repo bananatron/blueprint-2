@@ -1,48 +1,7 @@
-
-
 <main>
-    <div class="mv4" id="cable-test"></div>
-
-    <section x-cloak x-data="getStore()">
-        <button @click="toggleExpand">Expand</button>
-    
-        <span x-show="open">
-            Alpine.js adds interactivity for cheap...
-        </span>
-    </section>
+    Manor!
 </main>
 
 <footer>
     <p>&copy; 2023 Toadstool Labs LLC. All rights reserved.</p>
 </footer>
-
-
-<%# https://alpinejs.dev/ %>
-<script src="//unpkg.com/alpinejs" defer></script>
-
-<script>
-    function getStore() {
-        return {
-            open: false,
-            toggleExpand() {
-                this.open = !this.open;
-                console.log('toggleExpand');
-            }
-        };
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        window.Cable.subscriptions.create({ channel: "TestChannel", id: 1 }, {
-            connected: () => {
-                if (window.debug) console.log('✅ TableChannel connected');
-            },
-            received: (data) => {
-                if (window.debug)  console.log('TestChannel received data', data);
-                document.getElementById('cable-test').innerHTML = data;
-            },
-            disconnected: () => {
-                if (window.debug) console.warn('⚠️ TestChannel disconnected');
-            }
-        });
-    });
-</script>

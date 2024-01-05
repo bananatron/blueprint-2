@@ -1,21 +1,21 @@
 databases:
-  - name: blueprint_pg
-    databaseName: blueprint_production
-    user: blueprint
+  - name: manor_pg
+    databaseName: manor_production
+    user: manor
     region: oregon
 services:
   - type: redis
-    name: blueprint-sidekiq-redis
+    name: manor-sidekiq-redis
     region: oregon
     maxmemoryPolicy: noeviction
     ipAllowList: [] # only allow internal connections
   - type: redis
-    name: blueprint-actioncable-redis
+    name: manor-actioncable-redis
     region: oregon
     maxmemoryPolicy: noeviction
     ipAllowList: [] # only allow internal connections
   - type: web
-    name: blueprint
+    name: manor
     env: ruby
     region: oregon
     buildCommand: "./bin/render-build.sh"
@@ -35,7 +35,7 @@ services:
         sync: false
       - key: DATABASE_URL
         fromDatabase:
-          name: blueprint_pg
+          name: manor_pg
           property: connectionString
       - key: RAILS_MASTER_KEY
         generateValue: false
@@ -53,10 +53,10 @@ services:
       - key: ACTIONCABLE_REDIS_URL
         fromService:
           type: redis
-          name: blueprint-actioncable-redis
+          name: manor-actioncable-redis
           property: connectionString
   - type: worker
-    name: blueprint-sidekiq-worker
+    name: manor-sidekiq-worker
     env: ruby
     region: oregon
     buildCommand: bundle install
@@ -64,10 +64,10 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: blueprint_pg
+          name: manor_pg
           property: connectionString
       - key: REDIS_URL
         fromService:
           type: redis
-          name: blueprint-sidekiq-redis
+          name: manor-sidekiq-redis
           property: connectionString
