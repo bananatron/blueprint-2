@@ -10,44 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_03_001624) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_04_195339) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
   create_table "characters", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.string "physical_description", null: false
-    t.string "behavioral_description", null: false
-    t.integer "health", default: 100, null: false
-    t.integer "max_health", default: 100, null: false
-    t.integer "energy", default: 100, null: false
-    t.integer "max_energy", default: 100, null: false
-    t.integer "strength", default: 1, null: false
-    t.integer "dexterity", default: 1, null: false
-    t.integer "intelligence", default: 1, null: false
+    t.string "role", null: false
     t.uuid "room_id", null: false
     t.integer "x", null: false
     t.integer "y", null: false
-    t.uuid "user_id", null: false
+    t.datetime "ready_to_start"
     t.jsonb "meta", default: {}, null: false
+    t.uuid "user_id", null: false
+    t.uuid "session_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["room_id"], name: "index_characters_on_room_id"
+    t.index ["session_id"], name: "index_characters_on_session_id"
     t.index ["user_id"], name: "index_characters_on_user_id"
-  end
-
-  create_table "chat_messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "user_id"
-    t.uuid "character_id"
-    t.string "channel", null: false
-    t.text "body", null: false
-    t.jsonb "tags", default: [], null: false
-    t.jsonb "meta", default: {}, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["character_id"], name: "index_chat_messages_on_character_id"
-    t.index ["user_id"], name: "index_chat_messages_on_user_id"
   end
 
   create_table "loots", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -65,8 +47,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_03_001624) do
   end
 
   create_table "rooms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name", null: false
-    t.string "description"
+    t.uuid "session_id", null: false
     t.integer "width", default: 10, null: false
     t.integer "height", default: 10, null: false
     t.uuid "room_east_id"
@@ -78,6 +59,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_03_001624) do
     t.index ["room_north_id"], name: "index_rooms_on_room_north_id"
     t.index ["room_south_id"], name: "index_rooms_on_room_south_id"
     t.index ["room_west_id"], name: "index_rooms_on_room_west_id"
+    t.index ["session_id"], name: "index_rooms_on_session_id"
+  end
+
+  create_table "sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "invite_code", null: false
+    t.datetime "started_at"
+    t.jsonb "meta", default: {}, null: false
+    t.uuid "host_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["host_user_id"], name: "index_sessions_on_host_user_id"
+    t.index ["invite_code"], name: "index_sessions_on_invite_code"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -85,7 +78,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_03_001624) do
     t.string "email", null: false
     t.string "encrypted_password", null: false
     t.boolean "super", default: false, null: false
-    t.uuid "current_character_id"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -105,20 +97,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_03_001624) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["current_character_id"], name: "index_users_on_current_character_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
   add_foreign_key "characters", "rooms"
+  add_foreign_key "characters", "sessions"
   add_foreign_key "characters", "users"
-  add_foreign_key "chat_messages", "characters"
-  add_foreign_key "chat_messages", "users"
   add_foreign_key "loots", "characters"
   add_foreign_key "loots", "rooms"
   add_foreign_key "rooms", "rooms", column: "room_east_id"
   add_foreign_key "rooms", "rooms", column: "room_north_id"
   add_foreign_key "rooms", "rooms", column: "room_south_id"
   add_foreign_key "rooms", "rooms", column: "room_west_id"
+  add_foreign_key "rooms", "sessions"
 end

@@ -5,14 +5,12 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  session: one
-  width: 10
-  height: 10
+  host: one
+  invite_code: 'test_sesh_1'
 
 # column: value
 #
 two:
-  session: two
-  width: 10
-  height: 10
+  host: two
+  invite_code: 'test_sesh_2'
 # column: value

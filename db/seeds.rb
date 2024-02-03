@@ -4,17 +4,17 @@
 
 
 ActiveRecord::Base.transaction do
-
-  WorldBuilder.call
-
   password = SecureRandom.hex(16)
-  builder = Builders::User.new
-  builder.build(
-    name: 'Test',
+  user = User.create!(
+    name: 'Seed',
     email: 'seed@toadstool.tech',
     password: password,
-    super_user: true,
+    password_confirmation: password,
+    super: true,
   )
 
-  # TODO build rooms/worlds
+  builder = Builders::Session.new(host: user)
+  builder.build
+  raise builder.errors.join("\n") if builder.errors.any?
+
 end

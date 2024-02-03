@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   root to: "static#index"
 
-  get '/game', to: 'game#show', as: 'game_show'
-  get '/start', to: 'users#start', as: 'users_start'
-  post '/start', to: 'users#create', as: 'users_create'
+  get '/game/:session_id', to: 'game#show', as: 'game_show'
+  get '/join', to: 'game#join', as: 'game_join'
+  post '/join', to: 'game#join_game', as: 'join_game'
 end
