@@ -8,17 +8,17 @@ one:
   name: 'Test Character 1'
   x: 1
   y: 1
-  role: 'survivalist'
   room: one
   user: one
-  session: one
+  physical_description: 'Test Physical Description 1'
+  behavioral_description: 'Test Behavioral Description 1'
 
 two:
   name: 'Test Character 2'
   x: 1
   y: 1
-  role: 'historian'
   room: two
   user: two
-  session: two
+  physical_description: 'Test Physical Description 2'
+  behavioral_description: 'Test Behavioral Description 2'
 

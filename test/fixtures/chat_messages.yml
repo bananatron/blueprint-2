@@ -1,0 +1,11 @@
+one:
+  channel: 'global'
+  body: 'First test chat message'
+  character: one
+  user: one
+
+two:
+  channel: 'global'
+  body: 'Second test chat message'
+  character: two
+  user: two

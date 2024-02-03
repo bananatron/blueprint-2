@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Manor</title>
+    <title>Orion</title>
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -38,13 +38,14 @@
   <body>
     <nav>
       <section class="flex items-center pv2">
-        <a href="/">Manor</a>
+        <a href="/">Orion</a>
 
         <% if current_user %>
           <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
         <% else %>
           <%= link_to "Log In", new_user_session_path %> &nbsp;
-          <%= link_to 'Sign up', new_user_registration_path %>
+          <%# link_to 'Sign up', new_user_registration_path %>
+          <%= link_to 'Get Started', users_start_path %>
         <% end %>
       </section>
     </nav>

@@ -1,59 +1,66 @@
 
-Rooms: <%= Session.last.rooms.count %>
 <main x-data="$store.game" x-cloak>
-
-  <%# Game Started, show game %>
-
-  <%# Game not started %>
-
-    <%# Ready to start  (full & ready) %>
-
-    <%# Not ready yet, CANNOT join (full) %>
-    <%# Not ready yet, CAN join %>
-
-
-  <template x-if="!ready_to_start">
-    <ul class="list ma0 pa0 flex items-center w-100 justify-around">
-      <template x-for="role in available_character_roles">
-          <li x-text="role"></li>
-      </template>
-    </ul>
+  <template x-if="!cable_connected">
+    <div>Loading...</div>
   </template>
-
-
-    <div class="field mt4">
-      <legend>Session Invite Code</legend>
-      <input type='text' value=<%= @session.invite_code %> disabled>
-    </div>
-
-
+  <template x-if="cable_connected"><section class="game-container flex">
+    <%= render 'game_view' %>
+    <%= render 'chat_view' %>
+  </section></template>
 </main>
-
-<!--
-<% Session.last.rooms.each do |room| %>
-  <div class="db bg-blue ma2" style="width: <%= room.width* 10%>px; height: <%= room.height * 10 %>px;">
-    <%= 'E' if room.room_east %>
-    <%= 'W' if room.room_west %>
-    <%= 'S' if room.room_south %>
-    <%= 'N' if room.room_north %>
-  </div>
-<% end %>
--->
-
 
 <script src="//unpkg.com/alpinejs" defer></script>
 
 <script>
   document.addEventListener('alpine:init', () => {
+
     Alpine.store('game', {
       cable_connected: false,
-      session_id: '<%= @session.id %>',
-      available_character_roles: ['bb', 'lol'],
-      invite_code: '<%= @session.invite_code %>',
-      started: false,
-      rooms: [],
+      room_id: '<%= current_character.room_id %>',
+      current_character: '<%= current_character.object_serialize %>',
+      room: {},
+      messages: [
+        {character_name: 'Test', body: 'Hello'},
+      ],
+      objects: [],
       characters: [],
-      ready_to_start: false,
+      actioning_tile_x: null,
+      actioning_tile_y: null,
+      input_chat_body: null,
+
+      charactersByXY(x, y) {
+        return this.characters.filter((character) => {
+          return character.x === x && character.y === y;
+        })
+      },
+
+      hasAdjacentRoom(direction) {
+        if (direction === 'north') return !!this.room.room_north_id;
+        if (direction === 'south') return !!this.room.room_south_id;
+        if (direction === 'west') return !!this.room.room_west_id;
+        if (direction === 'east') return !!this.room.room_east_id;
+
+        // Return true if there is an adjacent room in any direction
+        return hasRoomNorth || hasRoomSouth || hasRoomWest || hasRoomEast;
+      },
+
+      transmitAction(action, data){
+        if (this.acting) return;
+        if (window.debug) console.log('transmitAction', action);
+        window.session_channel.perform(action, (data || {}))
+        this.acting = true;
+
+        setTimeout(() => {
+          this.acting = false;
+        }, ACTING_TIMEOUT_MS)
+      },
+
+      selectCharacter(role) {
+        if (this.acting) return;
+        if (window.debug) console.log('selectCharacter', role);
+
+        this.transmitAction('choose_character_role', {role: role})
+      },
 
       // toggleExpand() {
       //   this.open = !this.open;
@@ -63,24 +70,21 @@ Rooms: <%= Session.last.rooms.count %>
   });
 
   document.addEventListener('DOMContentLoaded', function() {
-    window.Cable.subscriptions.create({ channel: "SessionChannel", id: '<%= params[:session_id] %>' }, {
+    window.Cable.subscriptions.create({ channel: "RoomChannel", room_id: '<%= current_character.room_id %>' }, {
       connected: () => {
-        if (window.debug) console.log('✅ SessionChannel connected');
+        if (window.debug) console.log('✅ RoomChannel connected');
       },
       received: (data) => {
-        if (window.debug)  console.log('SessionChannel received data', data);
-          Alpine.store('game').cable_connected = true
-          Alpine.store('game').available_character_roles = data.available_character_roles;
-          Alpine.store('game').invite_code = data.invite_code;
-          Alpine.store('game').started = data.started;
-          Alpine.store('game').rooms = data.rooms;
-          Alpine.store('game').characters = data.characters;
-          Alpine.store('game').ready_to_start = data.ready_to_start;
+        if (window.debug)  console.log('RoomChannel received data', data);
+          Alpine.store('game').cable_connected = true;
 
-          console.log('Alpine.store', Alpine.store('game').available_character_roles);
+          // Alpine.store('game').invite_code = data.invite_code;
+          // Alpine.store('game').started = data.started;
+          Alpine.store('game').room = data;
+          Alpine.store('game').characters = data.characters;
       },
       disconnected: () => {
-        if (window.debug) console.warn('⚠️ SessionChannel disconnected');
+        if (window.debug) console.warn('⚠️ RoomChannel disconnected');
       }
     });
   });

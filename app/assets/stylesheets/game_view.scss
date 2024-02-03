@@ -1,0 +1,30 @@
+
+.game-container {
+  min-height: 90vh;
+}
+
+.room {
+  overflow: auto;
+}
+
+.tile {
+  width: 40px;
+  height: 56px;
+  min-width: 40px;
+  min-height: 56px;
+  background-color: rgba(0, 0, 0, 0.1);
+
+  border: 2px solid transparent;
+
+  &.actioning {
+    border: 2px dashed gold;
+  }
+}
+
+.wall,
+.wall-north,
+.wall-south,
+.wall-east,
+.wall-west {
+  background-color: #1c2436;
+}

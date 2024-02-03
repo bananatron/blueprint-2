@@ -78,7 +78,7 @@ Rails.application.configure do
 
    # Mailcatcher setup (requires 'gem install mailcatcher')
   # config.action_mailer.delivery_method = :file # Rails default
-  config.action_mailer.default_url_options = { host: ENV.fetch("APPLICATION_HOST") }
+  # config.action_mailer.default_url_options = { host: ENV.fetch("APPLICATION_HOST") }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
 end

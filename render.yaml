@@ -1,21 +1,21 @@
 databases:
-  - name: manor_pg
-    databaseName: manor_production
-    user: manor
+  - name: orion_pg
+    databaseName: orion_production
+    user: orion
     region: oregon
 services:
   - type: redis
-    name: manor-sidekiq-redis
+    name: orion-sidekiq-redis
     region: oregon
     maxmemoryPolicy: noeviction
     ipAllowList: [] # only allow internal connections
   - type: redis
-    name: manor-actioncable-redis
+    name: orion-actioncable-redis
     region: oregon
     maxmemoryPolicy: noeviction
     ipAllowList: [] # only allow internal connections
   - type: web
-    name: manor
+    name: orion
     env: ruby
     region: oregon
     buildCommand: "./bin/render-build.sh"
@@ -35,7 +35,7 @@ services:
         sync: false
       - key: DATABASE_URL
         fromDatabase:
-          name: manor_pg
+          name: orion_pg
           property: connectionString
       - key: RAILS_MASTER_KEY
         generateValue: false
@@ -53,10 +53,10 @@ services:
       - key: ACTIONCABLE_REDIS_URL
         fromService:
           type: redis
-          name: manor-actioncable-redis
+          name: orion-actioncable-redis
           property: connectionString
   - type: worker
-    name: manor-sidekiq-worker
+    name: orion-sidekiq-worker
     env: ruby
     region: oregon
     buildCommand: bundle install
@@ -64,10 +64,10 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: manor_pg
+          name: orion_pg
           property: connectionString
       - key: REDIS_URL
         fromService:
           type: redis
-          name: manor-sidekiq-redis
+          name: orion-sidekiq-redis
           property: connectionString

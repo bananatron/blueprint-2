@@ -9,6 +9,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.string :encrypted_password, null: false
 
       t.boolean :super, null: false, default: false
+      t.uuid :current_character_id, null: true
 
       ## Recoverable
       t.string   :reset_password_token
@@ -44,5 +45,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
     add_index :users, :reset_password_token, unique: true
     add_index :users, :confirmation_token,   unique: true
     add_index :users, :unlock_token,         unique: true
+    add_index :users, :current_character_id
   end
 end

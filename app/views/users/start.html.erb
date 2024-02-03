@@ -1,0 +1,19 @@
+<main>
+  <p>Get started</p>
+
+  <%= form_for :user, url: users_create_path, method: :post do |f| %>
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</main>

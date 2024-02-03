@@ -1,0 +1,16 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  padding: $base-spacing;
+  flex-grow: 1;
+  background-color: #1c2436;
+  border-left: 2px solid #415278;
+}
+.chat-input {
+  background-color: rgba(255, 255, 255, 0.05);
+  width: 100%;
+  color: rgba(255, 255, 255, 0.8);
+}
+.message {
+  &:before {content: '>'}
+}

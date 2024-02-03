@@ -1,14 +1,14 @@
-# Manor 2
+# Orion
 
-A Rails 7 starter w/ the following defaults:
+> *"To prevent war, the galaxy is on Orion's Belt."*
 
-- Deployable to Render
-- Devise installed
-- ActionCable ready
-- Alpine example for reactivity
-- SCSS w/ autoprefixing
-- Tachyons for styles
 
+## TODO
+- Subscribe to Global
+- Subscribe to room
+- subscribe to user_id (ensure only user can)
+- Send message
+- Look around in room
 
 ## Setup Postmark
 - Uncomment gem

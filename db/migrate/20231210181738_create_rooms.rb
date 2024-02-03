@@ -1,7 +1,10 @@
 class CreateRooms < ActiveRecord::Migration[7.1]
   def change
     create_table :rooms, id: :uuid do |t|
-      t.references :session, null: false, foreign_key: true, type: :uuid
+      t.string :name, null: false
+      t.string :description
+      t.string :zone_group_tag
+
       t.integer :width, null: false, default: 10
       t.integer :height, null: false, default: 10
 
@@ -17,6 +20,7 @@ class CreateRooms < ActiveRecord::Migration[7.1]
     add_index :rooms, :room_west_id
     add_index :rooms, :room_south_id
     add_index :rooms, :room_north_id
+    add_index :rooms, :zone_group_tag
 
     add_foreign_key :rooms, :rooms, column: :room_east_id
     add_foreign_key :rooms, :rooms, column: :room_west_id

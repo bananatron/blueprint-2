@@ -1,26 +1,24 @@
 @import 'variables';
-@import url('https://rsms.me/inter/inter.css');
-@font-face {
-  font-family: DMSerifDisplay;
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: asset-url('fonts/DM_Serif_Display/DMSerifDisplay-Regular.ttf') format('truetype'),
-       asset-url('fonts/DM_Serif_Display/DMSerifDisplay-Italic.ttf') format('truetype');
-}
-
-.font-dm {
-  font-family: DMSerifDisplay, serif;
-}
+// @import url('https://rsms.me/inter/inter.css');
+// @font-face {
+//   font-family: DMSerifDisplay;
+//   font-style: normal;
+//   font-weight: 100 900;
+//   font-display: swap;
+//   src: asset-url('fonts/DM_Serif_Display/DMSerifDisplay-Regular.ttf') format('truetype'),
+//        asset-url('fonts/DM_Serif_Display/DMSerifDisplay-Italic.ttf') format('truetype');
+// }
 
 html, body {
+  background-color: $background-color;
   margin: 0; padding: 0;
-  font-size: 18px;
+  font-size: 16px;
   box-sizing: border-box;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-  color: rgba(0, 0, 0, 0.85);
+  font-family: monospace, -apple-system, serif;
+  color: rgba(255, 255, 255, 0.85);
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
 }
 
 // .turbo-progress-bar {
@@ -33,37 +31,42 @@ p {
 
 a {
   cursor: pointer;
-  color: black;
+  color: white;
   &.is-link {
     text-decoration: underline;
   }
 }
 
-main,
-footer,
-header,
-nav {
+
+
+.contain {
   width: 90%;
   max-width: 800px;
   margin: 0 auto;
 }
+// main,
+// footer,
+// header,
+// nav {
+//   width: 90%;
+//   max-width: 800px;
+//   margin: 0 auto;
+// }
 
 legend,
 .legend,
 label,
 .label {
   display: block;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  font-size: 0.7rem;
-  color: rgba(0, 0, 0, 0.7);
-  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
 }
 th {
   font-weight: 500;
   letter-spacing: 0.5px;
   font-size: 0.7rem;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.6);
   text-transform: uppercase;
 }
 
@@ -84,12 +87,11 @@ input[type=checkbox] {
 
 .box {
   background-color: $color-box;
-  color: rgba(0, 0, 0, 0.9);
+  color: rgba(255, 255, 255, 0.9);
   padding: $base-spacing*2 $base-spacing*4;
   border-radius: $form-radius;
   line-height: 1.5;
-  box-shadow: 0 0.5rem 3rem -0.5rem rgba(0,0,0,0.08);
-  border: 1px solid #eaeaea;
+  border: 1px solid rgba(0, 0, 0, 0.3);
 
   &:empty {
     display: none;
@@ -97,17 +99,15 @@ input[type=checkbox] {
 
   &.is-narrow {
     padding: $base-spacing $base-spacing*2;
+    @include mobile {
+      padding: $base-spacing/2 $base-spacing;
+    }
   }
 
   &.is-red,
   &.is-danger {
-    background-color: rgba(255, 189, 189, 0.34);
-    border-color: #f3e1e1;
-  }
-
-  &.is-white {
-    background-color: white;
-    border-color: white;
+    background-color: $color-red;
+    // border-color: #f3e1e1;
   }
 }
 
@@ -131,7 +131,7 @@ input[type=text] {
   max-width: 100%;
   -webkit-appearance: none;
   align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: none;
   font-size: 1rem;
   height: 2.5em;
@@ -152,7 +152,7 @@ input[type=text] {
   }
 
   &:hover {
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 }
 
@@ -166,18 +166,23 @@ input[type=datetime-local] {
 
 button,
 .button {
-  font-weight: 500;
+  // font-weight: 500;
   display: inline-block;
   cursor: pointer;
   border-radius: $button-radius;
   background-color: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
   justify-content: center;
   padding: 0.5rem 1rem;
   text-align: center;
   white-space: nowrap;
   text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
   a {
     text-decoration: none;
   }
@@ -198,6 +203,14 @@ button,
     background-color: $color-primary;
     border-color: $color-primary;
     color: white;
+
+    &:hover,
+    &:focus {
+      transition: hue-rotate 0.5s;
+      filter: hue-rotate(10deg);
+      background-color: $color-primary;
+      border-color: $color-primary;
+    }
   }
   &.is-small {
     padding: 0.4rem 0.8rem;
@@ -209,17 +222,15 @@ button,
   }
   &.is-link {
     border-color: transparent;
-    font-weight: 500;
     text-decoration: underline;
-    color: black;
     &:hover {
-      color: black;
       border-color: transparent;
     }
   }
 
   &.is-large {
-    transform: scale(1.2);
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
   }
 
   &.is-right {
@@ -245,26 +256,27 @@ button,
 }
 
 
-.mini {
-  max-width: 32rem;
-  margin: 0 auto;
-  margin-top: $base-spacing*4;
-}
-
-
 table {
   th,
   td {
     text-align: left;
   }
   td {
-    padding: $base-spacing/4 0;
+    padding: $base-spacing/4 $base-spacing/2;
+  }
+
+  thead { pointer-events: none; }
+
+  tr:nth-child(even) { background-color: rgba(0, 0, 0, 0.1); }
+  tr:hover,
+  tr:focus {
+    background-color: rgba(0, 0, 0, 0.2);
   }
 }
 
 
 hr {
-  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
   border-bottom: none;
 }
 
@@ -273,7 +285,7 @@ hr {
   font-size: 0.6rem;
   display: inline-block;
   background-color: #e0e0e0;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.8);
   border-radius: 0;
   padding: 0.4rem 0.6rem;
   text-transform: uppercase;
@@ -298,3 +310,51 @@ summary {
 [x-cloak] {
   display: none;
 }
+
+
+.sprite {
+  display: block;
+  background-image: url('/graphics/sprite.png');
+  background-image: url('/graphics/historian.png');
+  background-size: 200%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 32px;
+  height: 48px;
+  min-width: 32px;
+  min-height: 48px;
+  image-rendering: pixelated;
+
+  &[data-sprite="survivalist"] {
+    background-image: url('/graphics/survivalist.png');
+  }
+
+  &[data-sprite="historian"] {
+    background-image: url('/graphics/historian.png');
+  }
+
+  &[data-sprite="medium"] {
+    background-image: url('/graphics/medium.png');
+  }
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-0.3rem); }
+  100% { transform: translateY(0); }
+}
+
+.anim-bounce {
+  animation: bounce 0.7s ease-in-out infinite;
+}
+
+.character-picker-box:hover,
+.character-picker-box:focus {
+  .sprite { animation: bounce 0.7s ease-in-out infinite; }
+  .button { opacity: 1;}
+}
+
+.color-medium { color: $color-medium; }
+.color-survivalist { color: $color-survivalist; }
+.color-historian { color: $color-historian; }
