@@ -1,4 +1,4 @@
-# Manor 2
+# Blueprint 2
 
 A Rails 7 starter w/ the following defaults:
 
