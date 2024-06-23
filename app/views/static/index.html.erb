@@ -1,7 +1,43 @@
 <main>
-    Manor!
+    <section x-data="$store.app" x-cloak>
+        <button x-on:click='toggleExpand'>Toggle Expand</button>
+
+        <template x-if='open'>
+            <p>Expanded via alpine!</p>
+        </template>
+    </section>
 </main>
 
 <footer class='mt4'>
     <p class='f7'>&copy; 2023 <a href='https://toadstool.tech'>Toadstool Labs</a> LLC. All rights reserved.</p>
 </footer>
+
+<script src="//unpkg.com/alpinejs" defer></script>
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.store('app', {
+        open: false,
+
+      toggleExpand() {
+        this.open = !this.open;
+        console.log('toggleExpand');
+      }
+    })
+  });
+
+  // Subscribe to actioncable TestChannel
+  document.addEventListener('DOMContentLoaded', () => {
+    const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
+    const channel = cable.subscriptions.create('TestChannel', {
+      connected() {
+        console.log('TestChannel connected');
+      },
+      disconnected() {
+        console.log('TestChannel disconnected');
+      },
+      received(data) {
+        console.log('TestChannel received', data);
+      }
+    });
+  });
+</script>

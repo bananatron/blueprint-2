@@ -43,3 +43,5 @@ pkg
 log
 test/tmp/*
 gemfiles/*.lock
+.byebug_history
+.DS_Store

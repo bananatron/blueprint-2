@@ -12,9 +12,4 @@ ActiveRecord::Base.transaction do
     password_confirmation: password,
     super: true,
   )
-
-  builder = Builders::Session.new(host: user)
-  builder.build
-  raise builder.errors.join("\n") if builder.errors.any?
-
 end

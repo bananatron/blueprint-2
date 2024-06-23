@@ -18,8 +18,4 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   root to: "static#index"
-
-  get '/game/:session_id', to: 'game#show', as: 'game_show'
-  get '/join', to: 'game#join', as: 'game_join'
-  post '/join', to: 'game#join_game', as: 'join_game'
 end
