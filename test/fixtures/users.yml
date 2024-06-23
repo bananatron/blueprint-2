@@ -6,12 +6,12 @@
 #
 one:
   name: Alice
-  email: alice@townscryer.ai
+  email: alice@toadstool.tech
   confirmed_at: <%= 2.days.ago %> 
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
 two:
   name: Bob
-  email: bob@townscryer.ai
+  email: bob@toadstool.tech
   confirmed_at: <%= 2.days.ago %>
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
