@@ -1,6 +1,6 @@
 <main>
     <section x-data="$store.app" x-cloak>
-        <button x-on:click='toggleExpand'>Toggle Expand</button>
+        <button class='button' x-on:click='toggleExpand'>Toggle Expand</button>
 
         <template x-if='open'>
             <p>Expanded via alpine!</p>

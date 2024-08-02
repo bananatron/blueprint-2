@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   root to: "static#index"
+
+  post '/stripe/webhooks', to: 'stripe#webhooks'
 end

@@ -33,8 +33,8 @@ module Blueprint
     end
 
     # SCSS Config
-    config.sass.preferred_syntax = :sass
-    config.sass.line_comments = false
-    config.sass.cache = false
+    # config.sass.preferred_syntax = :sass
+    # config.sass.line_comments = false
+    # config.sass.cache = false
   end
 end

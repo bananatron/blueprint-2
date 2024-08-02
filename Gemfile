@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.3.1"
+ruby "3.3.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3"
@@ -44,13 +44,13 @@ gem "bootsnap", require: false
 
 # Extras
 # Use SCSS for stylesheets
-gem 'sass-rails'
 gem 'autoprefixer-rails'       # Auto-prefixing for CSS
 gem 'devise'                   # Authentication
 gem 'sidekiq'                  # Background jobs processor
 gem 'oj'                       # Optimized JSON
-gem 'paddle_pay'               # Paddle payment gateway
+gem 'stripe'
 # gem 'postmark-rails'
+# gem 'paddle_pay'               # Paddle payment gateway
 # gem 'rack-canonical-host'      # Redirects all traffic to a single host
 # gem 'activeadmin'
 # gem 'aws-sdk-s3', require: false # For digital ocean spaces
@@ -80,3 +80,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "dartsass-rails", "~> 0.5.1"

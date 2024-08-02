@@ -102,6 +102,9 @@ GEM
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     crass (1.0.6)
+    dartsass-rails (0.5.1)
+      railties (>= 6.0.0)
+      sass-embedded (~> 1.63)
     date (3.3.4)
     debug (1.8.0)
       irb (>= 1.5.0)
@@ -120,13 +123,17 @@ GEM
       ruby2_keywords
     erubi (1.12.0)
     execjs (2.9.1)
-    faraday (2.9.2)
-      faraday-net_http (>= 2.0, < 3.2)
-    faraday-net_http (3.1.0)
-      net-http
-    ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    google-protobuf (4.27.3-aarch64-linux)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.27.3-arm64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.27.3-x86_64-linux)
+      bigdecimal
+      rake (>= 13)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.2.3)
@@ -152,8 +159,6 @@ GEM
     minitest (5.20.0)
     msgpack (1.7.2)
     mutex_m (0.2.0)
-    net-http (0.4.1)
-      uri
     net-imap (0.4.14)
       date
       net-protocol
@@ -170,8 +175,6 @@ GEM
     oj (3.16.2)
       bigdecimal (~> 3.1)
     orm_adapter (0.5.0)
-    paddle_pay (0.3.0)
-      faraday (>= 1.10.0, < 3.0)
     pg (1.5.4)
     prosopite (1.4.2)
     psych (5.1.1.1)
@@ -233,16 +236,12 @@ GEM
     rexml (3.2.6)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    sass-rails (6.0.0)
-      sassc-rails (~> 2.1, >= 2.1.1)
-    sassc (2.4.0)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
+    sass-embedded (1.77.8-aarch64-linux-gnu)
+      google-protobuf (~> 4.26)
+    sass-embedded (1.77.8-arm64-darwin)
+      google-protobuf (~> 4.26)
+    sass-embedded (1.77.8-x86_64-linux-gnu)
+      google-protobuf (~> 4.26)
     selenium-webdriver (4.16.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -262,8 +261,8 @@ GEM
     stimulus-rails (1.3.0)
       railties (>= 6.0.0)
     stringio (3.1.0)
+    stripe (12.4.0)
     thor (1.3.0)
-    tilt (2.3.0)
     timeout (0.4.1)
     turbo-rails (1.5.0)
       actionpack (>= 6.0.0)
@@ -272,7 +271,6 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uniform_notifier (1.16.0)
-    uri (0.13.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -292,6 +290,7 @@ GEM
 PLATFORMS
   aarch64-linux
   arm64-darwin-22
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
@@ -300,28 +299,28 @@ DEPENDENCIES
   bullet
   byebug
   capybara
+  dartsass-rails (~> 0.5.1)
   debug
   devise
   dotenv-rails
   importmap-rails
   oj
-  paddle_pay
   pg (~> 1.1)
   prosopite
   puma (>= 5.0)
   rails (~> 7.1.3)
   redis (>= 4.0.1)
-  sass-rails
   selenium-webdriver
   sidekiq
   sprockets-rails
   stimulus-rails
+  stripe
   turbo-rails
   tzinfo-data
   web-console
 
 RUBY VERSION
-   ruby 3.3.1p55
+   ruby 3.3.4p94
 
 BUNDLED WITH
    2.4.22
