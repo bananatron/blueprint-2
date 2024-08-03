@@ -1,11 +1,11 @@
 <main>
-  <h2>Edit <%= resource_name.to_s.humanize %></h2>
+  <h2>Profile</h2>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, data: {turbo: false}) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="field">
-      <%= f.label :email %><br />
+      <%= f.label :email %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
     </div>
 
@@ -14,22 +14,19 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.label :password, value: 'New Password' %>
       <%= f.password_field :password, autocomplete: "new-password" %>
-      <% if @minimum_password_length %>
-        <br />
-        <em><%= @minimum_password_length %> characters minimum</em>
-      <% end %>
     </div>
 
     <div class="field">
-      <%= f.label :password_confirmation %><br />
+      <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
 
     <div class="field">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+      <%= f.label :current_password %>
       <%= f.password_field :current_password, autocomplete: "current-password" %>
+      <span class='hint'>We need your current password to confirm your changes.</span>
     </div>
 
     <div class="actions">
@@ -37,10 +34,13 @@
     </div>
   <% end %>
 
-  <h3>Cancel my account</h3>
-
-  <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
   <%= link_to "Back", :back %>
 
+
+  <section class="card is-danger mt4 mb2">
+    <legend class='mb2'>Danger Zone</legend>
+    <div class="flex justify-end">
+      <div><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: 'button is-link' %></div>
+    </div>
+  </section>
 </main>

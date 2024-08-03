@@ -19,5 +19,7 @@ Rails.application.routes.draw do
 
   root to: "static#index"
 
+  get 'app', to: 'app#index'
+
   post '/stripe/webhooks', to: 'stripe#webhooks'
 end

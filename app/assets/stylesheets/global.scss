@@ -76,6 +76,11 @@ th {
     margin: 0.25rem 0;
     width: 100%;
   }
+
+  .hint {
+    font-size: 0.8rem;
+    opacity: 0.6;
+  }
 }
 input[type=checkbox] {
   width: auto;
@@ -289,6 +294,42 @@ hr {
 }
 summary {
   cursor: pointer;
+}
+
+.card {
+  background-color: $card-background;
+  padding: $base-spacing*2 $base-spacing*2;
+  border-radius: $form-radius;
+  line-height: 1.5;
+  border: 1px solid $border-color;
+
+  &:empty {
+    display: none;
+  }
+
+  &.is-narrow {
+    padding: $base-spacing $base-spacing*2;
+  }
+  &.is-super-narrow {
+    padding: $base-spacing/2 $base-spacing;
+  }
+
+  &.notice,
+  &.is-notice {
+    border-color: $color-yellow;
+    color: $color-yellow;
+    background-color: $color-yellow;
+  }
+
+  &.is-danger,
+  &.alert,
+  &.is-alert,
+  &.error,
+  &.is-error {
+    border-color: $color-red;
+    // color: $color-red;
+    background-color: $color-red-light;
+  }
 }
 
 

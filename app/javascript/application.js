@@ -7,3 +7,8 @@ window.Cable = ActionCable.createConsumer(`${window.rails_env == 'production' ? 
 
 // import Rails from '@rails/ujs';
 // Rails.start();
+
+// UJS
+// import Rails from "@rails/ujs";
+// Rails.start();
+import "./rails-ujs";

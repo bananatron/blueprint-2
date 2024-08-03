@@ -9,6 +9,6 @@ class StaticController < ApplicationController
   def redirect_authenticate
     return if current_user.blank?
 
-    redirect_to game_join_path
+    redirect_to app_path
   end
 end

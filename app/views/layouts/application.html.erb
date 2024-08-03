@@ -10,6 +10,10 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
+    <meta name="turbo-prefetch" content="false">
+    <meta name="turbo-cache-control" content="no-cache">
+    <%= turbo_refreshes_with method: :morph, scroll: :preserve %>
+
     <script type="text/javascript">
       window.application_host = '<%= ENV['APPLICATION_HOST'] %>';
       window.rails_env = '<%= Rails.env %>';
@@ -41,6 +45,7 @@
         <a href="/" class='fg1'>Blueprint</a>
 
         <% if current_user %>
+          <%= link_to 'Profile', edit_user_registration_path, class: 'button is-link' %>
           <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
         <% else %>
           <%= link_to "Log In", new_user_session_path, class: 'button is-link' %>

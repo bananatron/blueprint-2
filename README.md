@@ -8,6 +8,7 @@ A Rails 7 starter w/ the following defaults:
 - Alpine example for reactivity
 - SCSS w/ autoprefixing
 - Tachyons for styles
+- Turbo morph ready
 
 
 ## Setup Postmark
@@ -20,3 +21,12 @@ A Rails 7 starter w/ the following defaults:
 - Uncomment gem
 - Uncomment `aws_digital_ocean.rb`
 - Set ENV vars in said file
+
+## Setup Stripe
+- Edit StripeCharges
+- Edit StripeController
+
+
+## Supplementary
+- [A quick guide on Turbo morph and broadcasting](https://www.youtube.com/watch?v=hKKycPLN-sk)
+- [How importmaps work w/ Rails](https://github.com/rails/importmap-rails)

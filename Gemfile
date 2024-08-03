@@ -49,6 +49,8 @@ gem 'devise'                   # Authentication
 gem 'sidekiq'                  # Background jobs processor
 gem 'oj'                       # Optimized JSON
 gem 'stripe'
+gem 'dartsass-rails', '~> 0.5.1'
+gem 'ruby-openai'
 # gem 'postmark-rails'
 # gem 'paddle_pay'               # Paddle payment gateway
 # gem 'rack-canonical-host'      # Redirects all traffic to a single host
@@ -61,7 +63,7 @@ group :development, :test do
   gem 'bullet'
   gem 'dotenv-rails'
   gem 'byebug'
-  gem 'prosopite' # N+1 catcher
+  # gem 'prosopite' # N+1 catcher
 end
 
 group :development do
@@ -77,8 +79,6 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+  # gem "capybara"
+  # gem "selenium-webdriver"
 end
-
-gem "dartsass-rails", "~> 0.5.1"
