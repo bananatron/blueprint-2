@@ -46,11 +46,13 @@ gem "bootsnap", require: false
 # Use SCSS for stylesheets
 gem 'autoprefixer-rails'       # Auto-prefixing for CSS
 gem 'devise'                   # Authentication
-gem 'sidekiq'                  # Background jobs processor
+gem 'good_job'                 # Background jobs processor
+# gem 'sidekiq'                  # Background jobs processor
 gem 'oj'                       # Optimized JSON
 gem 'stripe'
 gem 'dartsass-rails', '~> 0.5.1'
 gem 'ruby-openai'
+
 # gem 'postmark-rails'
 # gem 'paddle_pay'               # Paddle payment gateway
 # gem 'rack-canonical-host'      # Redirects all traffic to a single host

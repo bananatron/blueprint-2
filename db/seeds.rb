@@ -8,8 +8,8 @@ ActiveRecord::Base.transaction do
   user = User.create!(
     name: 'Seed',
     email: 'seed@toadstool.tech',
-    password: password,
-    password_confirmation: password,
+    password: 'seed@toadstool.tech',
+    password_confirmation: 'seed@toadstool.tech',
     super: true,
   )
 end

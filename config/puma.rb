@@ -33,3 +33,24 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
+
+
+# To accomodate GoodJob async
+# See good_job.rb
+
+before_fork do
+  GoodJob.shutdown
+end
+
+on_worker_boot do
+  GoodJob.restart
+end
+
+on_worker_shutdown do
+  GoodJob.shutdown
+end
+
+MAIN_PID = Process.pid
+at_exit do
+  GoodJob.shutdown if Process.pid == MAIN_PID
+end

@@ -5,11 +5,6 @@ databases:
     region: oregon
 services:
   - type: redis
-    name: blueprint-sidekiq-redis
-    region: oregon
-    maxmemoryPolicy: noeviction
-    ipAllowList: [] # only allow internal connections
-  - type: redis
     name: blueprint-actioncable-redis
     region: oregon
     maxmemoryPolicy: noeviction
@@ -46,28 +41,13 @@ services:
       - key: RACK_ENV
         value: production
         sync: false
-      - key: SIDEKIQ_USERNAME
-        value: sidekiq
-      - key: SIDEKIQ_PASSWORD
-        sync: false
       - key: ACTIONCABLE_REDIS_URL
         fromService:
           type: redis
           name: blueprint-actioncable-redis
           property: connectionString
-  - type: worker
-    name: blueprint-sidekiq-worker
-    env: ruby
-    region: oregon
-    buildCommand: bundle install
-    startCommand: bundle exec sidekiq -C ./config/sidekiq.yml
     envVars:
       - key: DATABASE_URL
         fromDatabase:
           name: blueprint_pg
-          property: connectionString
-      - key: REDIS_URL
-        fromService:
-          type: redis
-          name: blueprint-sidekiq-redis
           property: connectionString

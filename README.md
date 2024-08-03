@@ -3,12 +3,13 @@
 A Rails 7 starter w/ the following defaults:
 
 - Deployable to Render
-- Devise installed
+- Devise Installed
 - ActionCable ready
-- Alpine example for reactivity
-- SCSS w/ autoprefixing
+- No JS build (importmaps instead)
+- Alpine.js example for reactivity
 - Tachyons for styles
 - Turbo morph ready
+- GoodJob for background jobs
 
 
 ## Setup Postmark
